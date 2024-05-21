@@ -25,6 +25,8 @@ class Dog(BaseModel):
     owner_name: Optional[str] = Field(
         default=None, description="The name of the owner of the dog"
     )
+    activity: Optional[str] = Field(default=None, description="The activity the dog should do limit this activity to: [walk, play, tricks]")
+    
 
 
 
@@ -32,6 +34,7 @@ class RobotDog:
     def __init__(self) -> None:
         self.name = None
         self.owner_name = None
+        self.activity = None
         self.llm = ChatOpenAI(temperature=0)
         self.history = ChatMessageHistory()
         self.history.add_user_message("You are a robotic dog that will have a personal name who obeys his owners commands rember what your name is and what your owners name is")
@@ -60,8 +63,13 @@ class RobotDog:
         data = self.runnable.invoke({"text": human})
         self.name = data.name
         self.owner_name = data.owner_name
-
+        self.activity = data.activity 
+        if(self.activity is not None):
+            print(("The dog" or self.name) + " is doing " + self.activity)
+        self.activity = None
+        
 doggy = RobotDog()
 doggy()
-print(doggy.name, doggy.owner_name )
+print(doggy.name, doggy.owner_name, doggy.activity )
 doggy()
+print(doggy.name, doggy.owner_name, doggy.activity )

@@ -25,4 +25,7 @@ class Dog:
     
 x = Dog()
 x()
+print(x.name, x.owner_name)
+x()
+
 #dog name is xyz then you ask questions then another question dog whats your name
