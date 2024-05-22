@@ -2,7 +2,6 @@ from typing import Optional
 import os
 from dotenv import load_dotenv, dotenv_values 
 from langchain_core.pydantic_v1 import BaseModel, Field
-
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_openai import ChatOpenAI
@@ -25,7 +24,7 @@ class Dog(BaseModel):
     owner_name: Optional[str] = Field(
         default=None, description="The name of the owner of the dog"
     )
-    activity: Optional[str] = Field(default=None, description="The activity the dog should do limit this activity to: [walk, play, tricks]")
+    activity: Optional[str] = Field(default=None, description="The activity the dog should do. Limit this activity to: [walk, trick, sit], if it does not fit in one of these categories reject the activity")
     
 
 
